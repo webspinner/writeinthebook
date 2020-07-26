@@ -1,0 +1,41 @@
+body {
+  background-color: black;
+}
+.header {
+  margin: auto 0 auto 0;
+}
+.logo {
+  margin-left: 200px;
+}
+.content {
+  margin: 0px 10% ;
+  background-color: rgb(251,229,177);
+  font-size: 20px;
+  padding: 5%;
+  display:flex;
+}
+.column {
+
+}
+img {
+  max-height: 40vw;
+  margin-left: 2em;
+}
+nav {
+  float: right;
+  margin-right: 200px;
+  color: white;
+  font-size: 32px;
+  text-decoration: none;
+}
+nav a, 
+nav a:visited, 
+nav a:active, 
+nav a:hover {
+  text-decoration: none;
+  color: white;
+}
+nav a:hover,
+nav a:active {
+  text-decoration: underline;
+}
