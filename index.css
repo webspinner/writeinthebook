@@ -1,10 +1,16 @@
 body {
   background-color: black;
 }
+h1 {
+  width: 100%;
+  display: block;
+  flex: none;
+}
 .header {
   margin: auto 0 auto 0;
 }
 .logo {
+  max-width: 300px;
   margin-left: 200px;
 }
 .content {
@@ -12,14 +18,28 @@ body {
   background-color: rgb(251,229,177);
   font-size: 20px;
   padding: 5%;
+}
+.column img {
+  width: 100%;
+}
+.ri::after {
+  content: 'Art by Rianneke Erikson';
+  float:right;
+  color: black;
+}
+.profile img {
+  width: 300px;
+  height: 300px;
+  display: inline;
+}
+.profile div {
+  display: inline-block;
+}
+.row {
   display:flex;
 }
 .column {
-
-}
-img {
-  max-height: 40vw;
-  margin-left: 2em;
+  width: 50%;
 }
 nav {
   float: right;
