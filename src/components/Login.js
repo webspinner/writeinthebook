@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
+import {style} from './Login.css';
 
 export default class Login extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            user_id: null,
             logging_in: false,
             forgot_password: false
         }
@@ -17,7 +17,10 @@ export default class Login extends Component {
 
     componentDidMount() {
         fetch("/api/session").then(r => r.json()).then(resp => {
-            console.log(resp)
+            const {user} = resp.session.passport;
+            fetch(`/api/user/${user}`).then(r => r.json()).then(resp => {
+                this.setState(resp)
+            })
         })
     }
 
@@ -30,6 +33,8 @@ export default class Login extends Component {
     }
 
     login(event) {
+        event.preventDefault()
+        event.stopPropagation()
         fetch('/api/login', {
             method: 'POST',
             headers: {
@@ -40,6 +45,11 @@ export default class Login extends Component {
             return resp.json()
         }).then((json) => {
             console.log(json)
+            this.setState({
+                user_id: json.id,
+                username: json.username,
+                profile: json.img_url
+            })
         })
     }
 
@@ -62,14 +72,16 @@ export default class Login extends Component {
         const {
             email,
             username,
-            password,
-            user_id, 
-            logging_in, 
+            id, 
+            logging_in,
+            roles,
             forgot_password
         } = this.state
 
-        if (user_id) {
-            return (<div>Logged In</div>)
+        if (id) {
+            return (<div>Logged In as {username} {roles.map(({name, img_url}) => {
+                return <img class='role-badge' src={img_url}/>
+            })}</div>)
         } else {
             if (!logging_in) {
                 return (<div onClick={() => this.setState({logging_in: true})}>Login</div>)
